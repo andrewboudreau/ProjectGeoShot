@@ -1,6 +1,17 @@
 # ProjectGeoShot
 Turn-based, geo-anchored "Gorillas/Worms" with real-world terrain & live wind data.
 
+# Overview
+A proof-of-concept artillery game where each player’s launcher sits at real-world coordinates.
+
+# Project features:
+ - Geo-Projection: Convert latitude/longitude into a flat game world (meters).
+ - Live Weather: Fetch surface (and optional altitude) wind data at shot time for realistic trajectory drift.
+ - Satellite & DEM Terrain: Stitch open-source imagery (NASA GIBS) and elevation (SRTM) into your playfield.
+ - Deterministic Simulation: Exchange only { angle, power, weatherSnapshot } so both clients replay identical shots.
+ - Modular Architecture: Swappable physics, weather, terrain, and networking layers (SignalR or REST).
+ - Get started by cloning, entering your coords, and firing your first geo-ballistic shot across tens of kilometers!
+
 ## Weather Service
 `GeoShot.Web` includes a lightweight weather service that retrieves data from
 [Open-Meteo](https://open-meteo.com/). It can fetch conditions for a single
