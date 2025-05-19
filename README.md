@@ -13,12 +13,12 @@ A proof-of-concept artillery game where each player’s launcher sits at real-worl
  - Get started by cloning, entering your coords, and firing your first geo-ballistic shot across tens of kilometers!
 
 ## Weather Service
-`GeoShot.Web` includes a lightweight weather service that retrieves data from
+`ProjectGeoShot.Web` includes a lightweight weather service that retrieves data from
 [Open-Meteo](https://open-meteo.com/). It can fetch conditions for a single
 location or for several points along a path. Results are cached in memory for a
 short period.
 
-This project aims to experiment with rendering real-world topography in a very simple ASP.NET application. The `/GeoShot.Web` folder contains a minimal API project with Razor Pages.
+This project aims to experiment with rendering real-world topography in a very simple ASP.NET application. The `/ProjectGeoShot.Web` folder contains a minimal API project with Razor Pages.
 
 The index page displays a map using open topographic map tiles from [OpenTopoMap](https://opentopomap.org). You can provide latitude and longitude values to center the map on a specific location.
 
