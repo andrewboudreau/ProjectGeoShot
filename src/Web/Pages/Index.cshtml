@@ -25,6 +25,8 @@
 <div class="mb-3">
     <button id="drawBtn" type="button" class="btn btn-secondary">Draw Mode</button>
     <button id="moveBtn" type="button" class="btn btn-secondary">Move Mode</button>
+    <input id="timeInput" type="number" class="form-control d-inline-block ms-2" value="1000" style="width:150px;" />
+    <button id="animateBtn" type="button" class="btn btn-primary ms-2">Animate</button>
 </div>
 
 <div id="map" style="height:600px;"></div>
@@ -41,6 +43,7 @@
         var drawMode = false;
         var currentLine = null;
         var latlngs = [];
+        var animatedLine = null;
 
         document.getElementById('drawBtn').onclick = function () {
             drawMode = true;
@@ -62,5 +65,43 @@
                 currentLine = L.polyline(latlngs, { color: 'red' }).addTo(map);
             }
         });
+
+        document.getElementById('animateBtn').onclick = function () {
+            if (latlngs.length < 2) return;
+            var duration = parseInt(document.getElementById('timeInput').value) || 1000;
+            if (animatedLine) {
+                map.removeLayer(animatedLine);
+            }
+            animatedLine = L.polyline([latlngs[0]], { color: 'blue' }).addTo(map);
+            drawMode = false;
+            map.dragging.enable();
+
+            var index = 0;
+            function animateSegment() {
+                var start = latlngs[index];
+                var end = latlngs[index + 1];
+                var startTime = performance.now();
+
+                function step() {
+                    var t = (performance.now() - startTime) / duration;
+                    if (t > 1) t = 1;
+                    var lat = start.lat + (end.lat - start.lat) * t;
+                    var lng = start.lng + (end.lng - start.lng) * t;
+                    var pts = latlngs.slice(0, index + 1);
+                    pts.push([lat, lng]);
+                    animatedLine.setLatLngs(pts);
+                    map.panTo([lat, lng], { animate: false });
+                    if (t < 1) {
+                        requestAnimationFrame(step);
+                    } else if (index < latlngs.length - 2) {
+                        index++;
+                        animateSegment();
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+
+            animateSegment();
+        };
     </script>
 }
