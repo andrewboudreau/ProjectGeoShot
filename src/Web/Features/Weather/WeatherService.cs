@@ -1,7 +1,21 @@
 using System.Text.Json;
+
 using Microsoft.Extensions.Caching.Memory;
 
-namespace GeoShot.Web.Features.Weather;
+namespace ProjectGeoShot.Web.Features.Weather;
+
+public interface IWeatherService
+{
+    Task<JsonElement> FetchWeatherAsync(double lat, double lon, IEnumerable<int>? altitudes = null);
+
+    Task<ICollection<WeatherData>> GetWeatherAlongPathAsync(
+        double startLat, double startLon,
+        double endLat, double endLon,
+        int numPoints = 5,
+        IEnumerable<int>? altitudes = null);
+}
+
+public record WeatherData(double Latitude, double Longitude, JsonElement Data);
 
 public class WeatherService : IWeatherService
 {
@@ -57,7 +71,7 @@ public class WeatherService : IWeatherService
         }
     }
 
-    public async Task<List<WeatherData>> GetWeatherAlongPathAsync(double startLat, double startLon, double endLat, double endLon, int numPoints = 5, IEnumerable<int>? altitudes = null)
+    public async Task<ICollection<WeatherData>> GetWeatherAlongPathAsync(double startLat, double startLon, double endLat, double endLon, int numPoints = 5, IEnumerable<int>? altitudes = null)
     {
         var points = InterpolatePoints(startLat, startLon, endLat, endLon, numPoints);
         var results = new List<WeatherData>();

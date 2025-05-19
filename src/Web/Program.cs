@@ -1,5 +1,5 @@
 
-using GeoShot.Web.Features.Weather;
+using ProjectGeoShot.Web.Features.Weather;
 
 var builder = WebApplication.CreateBuilder(args);
 

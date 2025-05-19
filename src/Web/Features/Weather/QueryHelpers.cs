@@ -1,4 +1,4 @@
-namespace GeoShot.Web.Features.Weather;
+namespace ProjectGeoShot.Web.Features.Weather;
 
 internal static class QueryHelpers
 {
