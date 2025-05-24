@@ -6,9 +6,14 @@
 		<ImplicitUsings>true</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<CompressionEnabled>false</CompressionEnabled>
+		<UserSecretsId>67581ef6-39b9-46b9-b203-971860cd1c5f</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..</DockerfileContext>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
 		<PackageReference Include="SharedTools.Web" Version="0.0.5" />
 	</ItemGroup>
+
 </Project>
