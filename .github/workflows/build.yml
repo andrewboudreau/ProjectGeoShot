@@ -1,4 +1,4 @@
-name: Build and Upload Razor Artifacts
+name: Build and Upload WebModule Artifacts
 
 on:
   push:
@@ -37,7 +37,7 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet publish src/Razor/ProjectGeoShot.Razor.csproj -c Release -o publish
+        run: dotnet publish src/Game/ProjectGeoShot.Game.csproj -c Release -o publish
       - name: List files in publish directory
         run: ls -la publish/
       - name: Commit version bump
@@ -52,8 +52,8 @@ jobs:
       - name: Prepare release assets
         run: |
           version=${{ steps.bump.outputs.new_version }}
-          mv publish/ProjectGeoShot.Razor.dll "publish/ProjectGeoShot.Razor-${version}.dll"
-          mv publish/ProjectGeoShot.Razor.deps.json "publish/ProjectGeoShot.Razor-${version}.deps.json"
+          mv publish/ProjectGeoShot.Game.dll "publish/ProjectGeoShot.Game-${version}.dll"
+          mv publish/ProjectGeoShot.Game.deps.json "publish/ProjectGeoShot.Game-${version}.deps.json"
 
       - name: Tag release
         if: github.actor != 'github-actions[bot]'
@@ -67,5 +67,5 @@ jobs:
         with:
           tag_name: "v${{ steps.bump.outputs.new_version }}"
           files: |
-            publish/ProjectGeoShot.Razor-${{ steps.bump.outputs.new_version }}.dll
-            publish/ProjectGeoShot.Razor-${{ steps.bump.outputs.new_version }}.deps.json
+            publish/ProjectGeoShot.Game-${{ steps.bump.outputs.new_version }}.dll
+            publish/ProjectGeoShot.Game-${{ steps.bump.outputs.new_version }}.deps.json

@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-		<StaticWebAssetBasePath>_content/ProjectGeoShot.Razor</StaticWebAssetBasePath>
+		<StaticWebAssetBasePath>_content/ProjectGeoShot.Game</StaticWebAssetBasePath>
 	</PropertyGroup>
 
 	<ItemGroup>

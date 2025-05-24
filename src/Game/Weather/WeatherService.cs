@@ -2,7 +2,7 @@ using System.Text.Json;
 
 using Microsoft.Extensions.Caching.Memory;
 
-namespace ProjectGeoShot.Web.Features.Weather;
+namespace ProjectGeoShot.Game.Weather;
 
 public interface IWeatherService
 {

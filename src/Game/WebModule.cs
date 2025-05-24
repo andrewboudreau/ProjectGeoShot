@@ -3,13 +3,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-using ProjectGeoShot.Web.Features.Game;
-
 using SharedTools.Web.Modules;
 
-namespace ProjectGeoShot.Razor;
+namespace ProjectGeoShot.Game;
 
-public class ProjectGeoShotWebModule : IWebModule
+public class WebModule : IWebModule
 {
     public void Configure(WebApplication app)
     {

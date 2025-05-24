@@ -1,4 +1,4 @@
-namespace ProjectGeoShot.Web.Features.Game;
+namespace ProjectGeoShot.Game;
 
 public interface IBattleStorage
 {

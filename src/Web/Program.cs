@@ -6,9 +6,9 @@ builder.Services
     .AddMemoryCache()
     .AddRazorPages();
 
-var version = "0.1.5";
+var version = "0.1.7";
 await builder.AddWebModules([
-    $"https://github.com/andrewboudreau/ProjectGeoShot/releases/download/v{version}/ProjectGeoShot.Razor-{version}.dll"
+    $"https://github.com/andrewboudreau/ProjectGeoShot/releases/download/v{version}/ProjectGeoShot.Game-{version}.dll"
 ]);
 
 var app = builder.Build();

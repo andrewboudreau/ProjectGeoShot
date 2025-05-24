@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Azure.Storage.Blobs;
 
-namespace ProjectGeoShot.Web.Features.Game;
+namespace ProjectGeoShot.Game;
 
 public class AzureBlobBattleStorage : IBattleStorage
 {
