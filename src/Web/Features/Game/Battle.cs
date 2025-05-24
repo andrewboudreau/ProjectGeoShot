@@ -2,7 +2,7 @@ namespace ProjectGeoShot.Web.Features.Game;
 
 public class Battle
 {
-    public Guid Id { get; init; } = GuidV7.NewGuid();
+    public Guid Id { get; init; } = Guid.CreateVersion7();
     public string Name { get; set; } = string.Empty;
     public List<Player> Players { get; } = new();
     public List<Shot> Shots { get; } = new();

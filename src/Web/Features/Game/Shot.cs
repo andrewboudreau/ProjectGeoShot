@@ -2,7 +2,7 @@ namespace ProjectGeoShot.Web.Features.Game;
 
 public class Shot
 {
-    public Guid Id { get; init; } = GuidV7.NewGuid();
+    public Guid Id { get; init; } = Guid.CreateVersion7();
     public Guid PlayerId { get; init; }
     public double Angle { get; set; }
     public double Power { get; set; }
