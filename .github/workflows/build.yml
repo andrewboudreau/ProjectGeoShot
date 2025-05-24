@@ -49,10 +49,23 @@ jobs:
           git commit -m "chore: bump version to ${{ steps.bump.outputs.new_version }}"
           git push
       
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      - name: Prepare release assets
+        run: |
+          version=${{ steps.bump.outputs.new_version }}
+          mv publish/ProjectGeoShot.Razor.dll "publish/ProjectGeoShot.Razor-${version}.dll"
+          mv publish/ProjectGeoShot.Razor.deps.json "publish/ProjectGeoShot.Razor-${version}.deps.json"
+
+      - name: Tag release
+        if: github.actor != 'github-actions[bot]'
+        run: |
+          git tag -a "v${{ steps.bump.outputs.new_version }}" -m "Release v${{ steps.bump.outputs.new_version }}"
+          git push origin "v${{ steps.bump.outputs.new_version }}"
+
+      - name: Create GitHub release
+        if: github.actor != 'github-actions[bot]'
+        uses: softprops/action-gh-release@v1
         with:
-          name: ProjectGeoShot-Razor
-          path: |
-            publish/ProjectGeoShot.Razor.dll
-            publish/ProjectGeoShot.Razor.deps.json
+          tag_name: "v${{ steps.bump.outputs.new_version }}"
+          files: |
+            publish/ProjectGeoShot.Razor-${{ steps.bump.outputs.new_version }}.dll
+            publish/ProjectGeoShot.Razor-${{ steps.bump.outputs.new_version }}.deps.json
