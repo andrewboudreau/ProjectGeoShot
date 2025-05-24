@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "ProjectGeoShot.Razor/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "10.0.0-preview.4.25258.110",
+          "SharedTools.Web": "0.0.5"
+        },
+        "runtime": {
+          "ProjectGeoShot.Razor.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Components.Web/10.0.0-preview.4.25258.110": {},
+      "SharedTools.Web/0.0.5": {
+        "runtime": {
+          "lib/net9.0/SharedTools.Web.dll": {
+            "assemblyVersion": "0.0.5.0",
+            "fileVersion": "0.0.5.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ProjectGeoShot.Razor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.AspNetCore.Components.Web/10.0.0-preview.4.25258.110": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SCOHzVU4gfigfiEBjiBKXLQQF+ayD+GXf//mR3SSj1Rh58FOuEhXehiZ9sM0DOc4bnWBNF6brzgqgdrRkOC2Zg==",
+      "path": "microsoft.aspnetcore.components.web/10.0.0-preview.4.25258.110",
+      "hashPath": "microsoft.aspnetcore.components.web.10.0.0-preview.4.25258.110.nupkg.sha512"
+    },
+    "SharedTools.Web/0.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KS2BbcUfyEfwAZa1yJ+oZCpq3qmqmZoW7tqpkzgM/Fa1K5IQWdwqCdfg5mhSolZr9xpV0qEO8lY6xkyYimi0AA==",
+      "path": "sharedtools.web/0.0.5",
+      "hashPath": "sharedtools.web.0.0.5.nupkg.sha512"
+    }
+  }
+}
