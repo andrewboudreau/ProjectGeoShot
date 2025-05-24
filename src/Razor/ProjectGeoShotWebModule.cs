@@ -16,10 +16,11 @@ public class ProjectGeoShotWebModule : IWebModule
         throw new NotImplementedException();
     }
 
-    public void ConfigureServices(WebApplicationBuilder builder)
+    public void ConfigureServices(IServiceCollection services)
     {
-        var connection = builder.Configuration["AzureBlobConnection"] ?? "UseDevelopmentStorage=true";
-        builder.Services.AddSingleton<IBattleStorage>(sp =>
+        //var connection = builder.Configuration["AzureBlobConnection"] ?? "UseDevelopmentStorage=true";
+        var connection = "UseDevelopmentStorage=true";
+        services.AddSingleton<IBattleStorage>(sp =>
             new AzureBlobBattleStorage(new BlobServiceClient(connection), "battles"));
     }
 }
