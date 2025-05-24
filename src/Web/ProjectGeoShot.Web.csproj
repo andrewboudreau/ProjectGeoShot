@@ -13,7 +13,7 @@
 	<ItemGroup>
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.25.0-beta.1" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
-		<PackageReference Include="SharedTools.Web" Version="0.0.7" />
+		<PackageReference Include="SharedTools.Web" Version="0.0.9" />
 	</ItemGroup>
 
 </Project>

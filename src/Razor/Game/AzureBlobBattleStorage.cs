@@ -1,22 +1,21 @@
 using System.Text.Json;
 using Azure.Storage.Blobs;
 
-
 namespace ProjectGeoShot.Web.Features.Game;
 
 public class AzureBlobBattleStorage : IBattleStorage
 {
-    private readonly BlobContainerClient _container;
+    private readonly BlobContainerClient container;
 
     public AzureBlobBattleStorage(BlobServiceClient client, string containerName)
     {
-        _container = client.GetBlobContainerClient(containerName);
+        container = client.GetBlobContainerClient(containerName);
     }
 
     public async Task SaveAsync(Battle battle, CancellationToken ct = default)
     {
-        await _container.CreateIfNotExistsAsync(cancellationToken: ct);
-        var blob = _container.GetBlobClient(GetFileName(battle.Id));
+        await container.CreateIfNotExistsAsync(cancellationToken: ct);
+        var blob = container.GetBlobClient(GetFileName(battle.Id));
         using var stream = new MemoryStream();
         await JsonSerializer.SerializeAsync(stream, battle, cancellationToken: ct);
         stream.Position = 0;
@@ -25,7 +24,7 @@ public class AzureBlobBattleStorage : IBattleStorage
 
     public async Task<Battle?> LoadAsync(Guid battleId, CancellationToken ct = default)
     {
-        var blob = _container.GetBlobClient(GetFileName(battleId));
+        var blob = container.GetBlobClient(GetFileName(battleId));
         if (!await blob.ExistsAsync(ct))
             return null;
 
