@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
 		<AssemblyName>ProjectGeoShot</AssemblyName>
@@ -13,7 +13,7 @@
 	<ItemGroup>
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.25.0-beta.1" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
-		<PackageReference Include="SharedTools.Web" Version="0.0.6" />
+		<PackageReference Include="SharedTools.Web" Version="0.0.7" />
 	</ItemGroup>
 
 </Project>
