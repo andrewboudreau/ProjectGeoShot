@@ -13,4 +13,10 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Razor\ProjectGeoShot.Razor.csproj" />
 	</ItemGroup>
+</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
+  </ItemGroup>
+
 </Project>
