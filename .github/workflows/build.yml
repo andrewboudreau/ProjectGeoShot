@@ -1,0 +1,55 @@
+name: Build and Upload Razor Artifacts
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Bump version
+        id: bump
+        if: github.actor != 'github-actions[bot]'
+        run: |
+          file=Directory.Build.props
+          version=$(grep -oP '(?<=<VersionPrefix>).*?(?=</VersionPrefix>)' "$file")
+          IFS='.' read -r major minor patch <<< "$version"
+          patch=$((patch + 1))
+          new_version="$major.$minor.$patch"
+          sed -i "s/<VersionPrefix>$version<\/VersionPrefix>/<VersionPrefix>$new_version<\/VersionPrefix>/" "$file"
+          echo "new_version=$new_version" >> "$GITHUB_OUTPUT"
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet publish src/Web/ProjectGeoShot.Web.csproj -c Release -o publish
+
+      - name: Commit version bump
+        if: github.actor != 'github-actions[bot]'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Directory.Build.props
+          git commit -m "chore: bump version to ${{ steps.bump.outputs.new_version }}"
+          git push
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ProjectGeoShot-Razor
+          path: |
+            publish/ProjectGeoShot.Razor.dll
+            publish/ProjectGeoShot.Razor.deps.json
