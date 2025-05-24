@@ -38,7 +38,8 @@ jobs:
 
       - name: Build
         run: dotnet publish src/Razor/ProjectGeoShot.Razor.csproj -c Release -o publish
-
+      - name: List files in publish directory
+        run: ls -la publish/
       - name: Commit version bump
         if: github.actor != 'github-actions[bot]'
         run: |
@@ -47,10 +48,9 @@ jobs:
           git add Directory.Build.props
           git commit -m "chore: bump version to ${{ steps.bump.outputs.new_version }}"
           git push
-      - name: List files in publish directory
-        run: ls -la publish/
+      
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ProjectGeoShot-Razor
           path: |
