@@ -13,7 +13,7 @@ public class ProjectGeoShotWebModule : IWebModule
 {
     public void Configure(WebApplication app)
     {
-        throw new NotImplementedException();
+        return;
     }
 
     public void ConfigureServices(IServiceCollection services)
