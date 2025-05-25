@@ -3,29 +3,21 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-using SharedTools.Web;
 using SharedTools.Web.Modules;
 
 namespace ProjectGeoShot.Game;
 
 public class WebModule : IWebModule
 {
-    public static GitHubWebModuleResource GitHubResource { get; } =
-        new GitHubWebModuleResource(
-            Owner: "andrewboudreau", 
-            Repo: nameof(ProjectGeoShot), 
-            FilenameBuilder: v => $"{nameof(ProjectGeoShot)}.Game-{v}.dll");
-
-    public void Configure(WebApplication app)
+    public void ConfigureApp(WebApplication app)
     {
         return;
     }
 
-    public void ConfigureServices(IServiceCollection services)
+    public void ConfigureBuilder(WebApplicationBuilder builder)
     {
-        //var connection = builder.Configuration["AzureBlobConnection"] ?? "UseDevelopmentStorage=true";
-        var connection = "UseDevelopmentStorage=true";
-        services.AddSingleton<IBattleStorage>(sp =>
+        var connection = builder.Configuration["AzureBlobConnection"] ?? "UseDevelopmentStorage=true";
+        builder.Services.AddSingleton<IBattleStorage>(sp =>
             new AzureBlobBattleStorage(new BlobServiceClient(connection), "battles"));
     }
 }

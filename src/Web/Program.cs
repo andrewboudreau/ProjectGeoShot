@@ -1,6 +1,5 @@
+using SharedTools.Web;
 using SharedTools.Web.Modules;
-
-using static SharedTools.Web.GitHubDownloadExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,16 +7,8 @@ builder.Services
     .AddMemoryCache()
     .AddRazorPages();
 
-var release = await GetLatestReleaseVersionAsync(
-    BuildLatestUrl("ProjectGeoShot", "andrewboudreau").ToString());
-
-var releaseUrl = BuildReleaseUrl(
-    "ProjectGeoShot",
-    "andrewboudreau",
-    release.Version,
-    v => $"ProjectGeoShot.Game-{v}.dll");
-
-await builder.AddWebModules([releaseUrl.ToString()]);
+var projectGeoShot = await ProjectGeoShotResourceUrl();
+await builder.AddWebModules([projectGeoShot]);
 
 var app = builder.Build();
 
@@ -27,3 +18,18 @@ app.MapRazorPages();
 app.UseWebModules();
 
 app.Run();
+
+static async Task<Uri> ProjectGeoShotResourceUrl()
+{
+    GitHubWebModuleResource resource = new(
+        Owner: "andrewboudreau",
+        Repo: nameof(ProjectGeoShot),
+        FilenameBuilder: v => $"{nameof(ProjectGeoShot)}.Game-{v}.dll");
+
+
+    var (version, _) = await GitHubDownloadExtensions
+        .GetLatestReleaseVersionAsync(resource);
+
+    return GitHubDownloadExtensions
+        .BuildReleaseUrl(resource with { Version = version });
+}
