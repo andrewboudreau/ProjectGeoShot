@@ -8,7 +8,9 @@ builder.Services
     .AddRazorPages();
 
 var projectGeoShot = await ProjectGeoShotResourceUrl();
-await builder.AddWebModules([projectGeoShot]);
+var projectGeoShotAssembly = typeof(ProjectGeoShot.Game.WebModule).Assembly;
+
+await builder.AddWebModules([], [projectGeoShotAssembly]);
 
 var app = builder.Build();
 
@@ -26,10 +28,5 @@ static async Task<Uri> ProjectGeoShotResourceUrl()
         Repo: nameof(ProjectGeoShot),
         FilenameBuilder: v => $"{nameof(ProjectGeoShot)}.Game-{v}.dll");
 
-
-    var (version, _) = await GitHubDownloadExtensions
-        .GetLatestReleaseVersionAsync(resource);
-
-    return GitHubDownloadExtensions
-        .BuildReleaseUrl(resource with { Version = version });
+    return await GitHubDownloadExtensions.BuildLatestResourceUrl(resource);
 }

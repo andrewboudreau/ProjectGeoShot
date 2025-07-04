@@ -6,11 +6,17 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AddRazorSupportForMvc>true</AddRazorSupportForMvc>
 		<StaticWebAssetBasePath>_content/ProjectGeoShot.Game</StaticWebAssetBasePath>
-	</PropertyGroup>
 
-	<ItemGroup>
-		<FrameworkReference Include="Microsoft.AspNetCore.App" />
-	</ItemGroup>
+		<!-- NuGet Package Properties -->
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageId>ProjectGeoShot.Game</PackageId>
+		<Version>$(VersionPrefix)</Version>
+		<Authors>Andrew Boudreau</Authors>
+		<Description>A game module for ProjectGeoShot.</Description>
+		<PackageTags>geoshot game web module</PackageTags>
+		<RepositoryUrl>https://github.com/andrewboudreau/ProjectGeoShot</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
 	
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />
@@ -19,7 +25,7 @@
 	<ItemGroup>
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.25.0-beta.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.0-preview.4.25258.110" />
-		<PackageReference Include="SharedTools.Web" Version="0.0.13" />
+		<PackageReference Include="SharedTools.Web" Version="0.0.15" />
 	</ItemGroup>
 
 </Project>

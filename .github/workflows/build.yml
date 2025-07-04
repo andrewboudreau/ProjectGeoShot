@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
         contents: write
+        packages: write # Add packages permission
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,10 +37,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build
-        run: dotnet publish src/Game/ProjectGeoShot.Game.csproj -c Release -o publish
-      - name: List files in publish directory
-        run: ls -la publish/
+      - name: Pack project
+        run: dotnet pack src/Game/ProjectGeoShot.Game.csproj -c Release -o nupkgs
+
       - name: Commit version bump
         if: github.actor != 'github-actions[bot]'
         run: |
@@ -48,24 +48,6 @@ jobs:
           git add Directory.Build.props
           git commit -m "chore: bump version to ${{ steps.bump.outputs.new_version }}"
           git push
-      
-      - name: Prepare release assets
-        run: |
-          version=${{ steps.bump.outputs.new_version }}
-          mv publish/ProjectGeoShot.Game.dll "publish/ProjectGeoShot.Game-${version}.dll"
-          mv publish/ProjectGeoShot.Game.deps.json "publish/ProjectGeoShot.Game-${version}.deps.json"
 
-      - name: Tag release
-        if: github.actor != 'github-actions[bot]'
-        run: |
-          git tag -a "v${{ steps.bump.outputs.new_version }}" -m "Release v${{ steps.bump.outputs.new_version }}"
-          git push origin "v${{ steps.bump.outputs.new_version }}"
-
-      - name: Create GitHub release
-        if: github.actor != 'github-actions[bot]'
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: "v${{ steps.bump.outputs.new_version }}"
-          files: |
-            publish/ProjectGeoShot.Game-${{ steps.bump.outputs.new_version }}.dll
-            publish/ProjectGeoShot.Game-${{ steps.bump.outputs.new_version }}.deps.json
+      - name: Push to GitHub Packages
+        run: dotnet nuget push "nupkgs/*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }} --source "https://nuget.pkg.github.com/andrewboudreau/index.json"
