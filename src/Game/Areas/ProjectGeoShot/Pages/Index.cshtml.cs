@@ -6,8 +6,19 @@ namespace ProjectGeoShot.Game.Areas.ProjectGeoShot.Pages;
 [Area("ProjectGeoShot")]
 public class IndexModel : PageModel
 {
-    public void OnGet()
+    private readonly IBattleStorage storage;
+
+    public IndexModel(IBattleStorage storage)
     {
-        // Page logic here
+        this.storage = storage;
+    }
+
+    public async Task OnGet()
+    {
+        await storage.SaveAsync(new Battle
+        {
+            Id = Guid.NewGuid(),
+            Name = "Test Battle"
+        });
     }
 }
