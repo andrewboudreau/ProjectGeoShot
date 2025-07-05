@@ -6,11 +6,13 @@ on:
       - main
     tags:
       - 'v*.*.*'
+  workflow_dispatch: # Allows manual triggering
 
 jobs:
   bump_version:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]'
+    # This job only runs for pushes to main, not for tags or bot commits
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]'
     permissions:
       contents: write
     steps:
@@ -45,7 +47,8 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/v')
+    # This job runs on tag pushes or manual dispatch
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
     permissions:
       contents: read
       packages: write
