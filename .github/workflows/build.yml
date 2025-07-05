@@ -1,18 +1,15 @@
-name: Build and Publish
+name: Bump Version
 
 on:
   push:
     branches:
       - main
-    tags:
-      - 'v*.*.*'
-  workflow_dispatch: # Allows manual triggering
 
 jobs:
   bump_version:
     runs-on: ubuntu-latest
     # This job only runs for pushes to main, not for tags or bot commits
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && github.actor != 'github-actions[bot]'
+    if: github.actor != 'github-actions[bot]'
     permissions:
       contents: write
     steps:
@@ -25,6 +22,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore
 
       - name: Bump version
         id: bump
@@ -44,31 +47,3 @@ jobs:
           git add Directory.Build.props
           git commit -m "chore: bump version to ${{ steps.bump.outputs.new_version }}"
           git push
-
-  publish:
-    runs-on: ubuntu-latest
-    # This job runs on tag pushes or manual dispatch
-    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
-
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Build project
-        run: dotnet build src/Game/ProjectGeoShot.Game.csproj -c Release --no-restore
-
-      - name: Pack project
-        run: dotnet pack src/Game/ProjectGeoShot.Game.csproj -c Release -o ../../nupkgs --no-build
-
-      - name: Publish to NuGet.org
-        run: dotnet nuget push "nupkgs/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

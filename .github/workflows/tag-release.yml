@@ -1,13 +1,14 @@
-name: Create Release Tag
+name: Tag and Publish
 
 on:
   workflow_dispatch:
 
 jobs:
-  tag:
+  tag_and_publish:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,3 +26,20 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git tag "v${{ steps.get_version.outputs.version }}"
           git push origin "v${{ steps.get_version.outputs.version }}"
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build project
+        run: dotnet build src/Game/ProjectGeoShot.Game.csproj -c Release --no-restore
+
+      - name: Pack project
+        run: dotnet pack src/Game/ProjectGeoShot.Game.csproj -c Release -o ../../nupkgs --no-build
+
+      - name: Publish to NuGet.org
+        run: dotnet nuget push "nupkgs/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
