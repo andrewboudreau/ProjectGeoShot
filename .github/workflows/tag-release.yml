@@ -39,7 +39,7 @@ jobs:
         run: dotnet build src/Game/ProjectGeoShot.Game.csproj -c Release --no-restore
 
       - name: Pack project
-        run: dotnet pack src/Game/ProjectGeoShot.Game.csproj -c Release -o ../../nupkgs --no-build
+        run: dotnet pack src/Game/ProjectGeoShot.Game.csproj -c Release -o ./artifacts --no-build
 
       - name: Publish to NuGet.org
-        run: dotnet nuget push "nupkgs/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push "./artifacts/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
