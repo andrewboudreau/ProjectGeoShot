@@ -23,6 +23,7 @@ public class WebModule : IWebModule
             .ValidateDataAnnotations() // This will check the [Required] attributes at startup
             .ValidateOnStart();
 
+        Console.WriteLine("OMGO OMG OMG ConfigureBuilder for ProjectGeoShot");
         // 2. The module registers its services, consuming the strongly-typed options
         builder.Services.AddSingleton<IBattleStorage>(sp =>
         {
