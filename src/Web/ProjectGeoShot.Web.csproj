@@ -18,5 +18,4 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Game\ProjectGeoShot.Game.csproj" />
 	</ItemGroup>
-
 </Project>
