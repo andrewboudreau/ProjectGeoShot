@@ -11,10 +11,16 @@ namespace ProjectGeoShot.Game;
 
 public class WebModule : IApplicationPartModule
 {
-    public string Name => throw new NotImplementedException();
+    public string Name => "ProjectGeoShot.Game";
 
     public void Configure(WebApplication app)
     {
+        app.MapGet("/projectgeoshot-game/info", () => new
+        {
+            Module = Name,
+            Version = GetType().Assembly.GetName().Version?.ToString() ?? "1.0.0",
+            Status = "Active"
+        });
     }
 
     public void ConfigureApplicationParts(ApplicationPartManager applicationPartManager)

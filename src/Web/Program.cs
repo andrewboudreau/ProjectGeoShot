@@ -12,8 +12,8 @@ var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
+app.MapRazorPages();
 app.UseApplicationPartModules();
 
-app.MapRazorPages();
 app.Run();
 
