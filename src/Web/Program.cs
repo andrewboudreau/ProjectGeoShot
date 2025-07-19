@@ -6,14 +6,14 @@ builder.Services
     .AddMemoryCache()
     .AddRazorPages();
 
-await builder.AddWebModules(["ProjectGeoShot.Game"]);
+await builder.AddApplicationPartModules(["ProjectGeoShot.Game"]);
 
 var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
-app.MapRazorPages();
-app.UseWebModules();
+app.UseApplicationPartModules();
 
+app.MapRazorPages();
 app.Run();
 
