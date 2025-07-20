@@ -9,13 +9,13 @@ using SharedTools.Web.Modules;
 
 namespace ProjectGeoShot.Game;
 
-public class WebModule : IApplicationPartModule
+public class ProjectGeoShotGameModule : IApplicationPartModule
 {
     public string Name => "ProjectGeoShot.Game";
 
     public void Configure(WebApplication app)
     {
-        app.MapGet("/projectgeoshot-game/info", () => new
+        app.MapGet($"/{Name}/info", () => new
         {
             Module = Name,
             Version = GetType().Assembly.GetName().Version?.ToString() ?? "1.0.0",

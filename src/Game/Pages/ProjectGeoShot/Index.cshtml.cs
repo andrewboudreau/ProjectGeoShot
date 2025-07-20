@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ProjectGeoShot.Game.Areas.ProjectGeoShot.Pages;
+namespace ProjectGeoShot.Game.Pages.ProjectGeoShot;
 
 [Area("ProjectGeoShot")]
 public class IndexModel : PageModel
