@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ProjectGeoShot.Game.Pages.ProjectGeoShot;
+namespace ProjectGeoShot.Game.Pages;
 
-[Area("ProjectGeoShot")]
 public class IndexModel : PageModel
 {
     private readonly IBattleStorage storage;
