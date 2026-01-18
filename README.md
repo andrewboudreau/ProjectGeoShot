@@ -22,9 +22,6 @@ This project aims to experiment with rendering real-world topography in a very s
 
 The index page displays a map using open topographic map tiles from [OpenTopoMap](https://opentopomap.org). You can provide latitude and longitude values to center the map on a specific location.
 
-## Animation & Mocap
-See [ANIMATION_PIPELINE.md](ANIMATION_PIPELINE.md) for notes on rigs, formats, retargeting, and mocap conversion.
-
 ## How to build and run
 
 1. Ensure the [.NET 9 SDK](https://dotnet.microsoft.com/download) is installed.
@@ -35,3 +32,6 @@ See [ANIMATION_PIPELINE.md](ANIMATION_PIPELINE.md) for notes on rigs, formats, r
 3. Navigate to `http://localhost:5000` in your browser.
 
 Use the form on the page to update the latitude and longitude of the displayed location.
+
+## Future Work
+- Animation & Mocap: See [ANIMATION_PIPELINE.md](ANIMATION_PIPELINE.md) for notes on rigs, formats, retargeting, and mocap conversion.

@@ -11,7 +11,7 @@
 
 ## Rig & Naming Conventions
 - Use a consistent bind pose (T/A), and keep bone orientations stable across characters.
-- Prefer `Root/Hips`, `Spine1/Spine2`, `Neck/Head`, `UpperArm_L`, `LowerArm_L`, `Hand_L` (same for `_R`).
+- Prefer `Root/Hips`, `Spine1/Spine2`, `Neck/Head`, `UpperArm_L`, `LowerArm_L`, `Hand_L` (same for `_R`)
 - Name clips consistently (`Idle`, `Walk`, `Run`, `JumpStart`, `JumpLoop`, `JumpLand`).
 
 ## Retargeting & Blend Trees
@@ -21,7 +21,7 @@
 
 ## Frame Rates & Units
 - Normalize to **30 or 60 fps** and resample source clips to a consistent frame rate.
-- Maintain **meters** as the unit scale and document axis conventions when exporting.
+- Maintain **meters** as the unit scale and document axis conventions (Y-up right-handed coordinate system: +X right, +Y up, +Z forward) when exporting.
 
 ## Mocap → In-Game Pipeline
 1. Acquire BVH/FBX clips (Mixamo/CMU/Rokoko).
