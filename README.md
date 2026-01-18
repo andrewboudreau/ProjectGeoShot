@@ -34,4 +34,4 @@ The index page displays a map using open topographic map tiles from [OpenTopoMap
 Use the form on the page to update the latitude and longitude of the displayed location.
 
 ## Future Work
-- Animation & Mocap: See [ANIMATION_PIPELINE.md](ANIMATION_PIPELINE.md) for notes on rigs, formats, retargeting, and mocap conversion.
+- Animation & Mocap: See [ANIMATION_PIPELINE.md](ANIMATION_PIPELINE.md) for notes on rigs, formats, retargeting, mocap conversion, and the right-handed coordinate system (+X right, +Y up, +Z forward).
