@@ -2,7 +2,7 @@
 Turn-based, geo-anchored "Gorillas/Worms" with real-world terrain & live wind data.
 
 # Overview
-A proof-of-concept artillery game where each player’s launcher sits at real-world coordinates.
+A proof-of-concept artillery game where each playerï¿½s launcher sits at real-world coordinates.
 
 # Project features:
  - Geo-Projection: Convert latitude/longitude into a flat game world (meters).
@@ -21,6 +21,9 @@ short period.
 This project aims to experiment with rendering real-world topography in a very simple ASP.NET application. The `/ProjectGeoShot.Web` folder contains a minimal API project with Razor Pages.
 
 The index page displays a map using open topographic map tiles from [OpenTopoMap](https://opentopomap.org). You can provide latitude and longitude values to center the map on a specific location.
+
+## Animation & Mocap
+See [ANIMATION_PIPELINE.md](ANIMATION_PIPELINE.md) for notes on rigs, formats, retargeting, and mocap conversion.
 
 ## How to build and run
 
