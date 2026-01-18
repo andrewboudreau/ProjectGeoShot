@@ -25,7 +25,7 @@ The index page displays a map using open topographic map tiles from [OpenTopoMap
 ## How to build and run
 
 1. Ensure the [.NET 9 SDK](https://dotnet.microsoft.com/download) is installed.
-2. From the `GeoShot.Web` directory run:
+2. From the `ProjectGeoShot.Web` directory run:
    ```bash
    dotnet run
    ```

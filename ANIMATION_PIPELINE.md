@@ -21,7 +21,7 @@
 
 ## Frame Rates & Units
 - Normalize to **30 or 60 fps** and resample source clips to a consistent frame rate.
-- Maintain **meters** as the unit scale and document axis conventions (Y-up right-handed coordinate system: +X right, +Y up, +Z forward) when exporting.
+- Maintain **meters** as the unit scale and document axis conventions (right-handed coordinate system: +X right, +Y up, +Z forward) when exporting.
 
 ## Mocap → In-Game Pipeline
 1. Acquire BVH/FBX clips (Mixamo/CMU/Rokoko).
