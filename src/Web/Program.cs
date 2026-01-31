@@ -2,18 +2,16 @@ using SharedTools.Web.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
-    .AddMemoryCache()
-    .AddRazorPages();
-
-await builder.AddApplicationPartModules(["ProjectGeoShot.Game"]);
+await builder.AddApplicationPartModules([
+    "ProjectGeoShot.Game",
+    "SharedTools.ModuleManagement"
+]);
 
 var app = builder.Build();
 
-app.UseStaticFiles();
-app.UseRouting();
-app.MapRazorPages();
 app.UseApplicationPartModules();
 
-app.Run();
+// Add a simple home page that redirects to the Scoreboard module
+app.MapGet("/", () => Results.Redirect("/ProjectGeoShot/"));
 
+app.Run();
